@@ -1,0 +1,35 @@
+name: ci-workflow
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - main
+
+    
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: install terraform
+        uses: hashicorp/setup-terraform@v4
+
+      - name: terraform init
+        working-directory: terraform-infra
+        run: terraform init
+
+      - name: terraform fmt
+        working-directory: terraform-infra
+        run: terraform fmt -check -recursive
+
+      - name: terraform validate
+        working-directory: terraform-infra
+        run: terraform validate
+
+      - name: build docker image
+        run: docker build -t ci-test-image -f Dockerfile .
