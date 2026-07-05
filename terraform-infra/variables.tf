@@ -1,9 +1,9 @@
-variable "image_tag"{
-    type = string
-    nullable = true
+variable "image_tag" {
+  type     = string
+  nullable = true
 }
 
-variable "deploy_lambda"{
-    type=bool
-    default=false
+variable "deploy_lambda" {
+  type    = bool
+  default = false
 }
