@@ -5,7 +5,7 @@
 # api-gateway
 
 resource "aws_s3_bucket" "model_bucket" {
-  bucket = "gh_actions_model_bucket"
+  bucket = "gh_actions_model_bucket_raghuvar"
 }
 
 resource "aws_ecr_repository" "image_repo" {
