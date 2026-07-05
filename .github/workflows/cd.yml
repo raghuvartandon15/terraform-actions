@@ -28,7 +28,7 @@ jobs:
 
       - name: terraform apply
         working-directory: terraform-infra
-        run: terraform apply --auto-approve 
+        run: terraform apply -var="image_tag=null" -input=false --auto-approve 
 
       - name: read terraform output
         id: tf_outputs
@@ -53,4 +53,9 @@ jobs:
 
       - name: deploy lambda 
         working-directory: terraform-infra
-        run: terraform apply -var="deploy_lambda=true" -var="image_tag=${{ github.run_number }}" --auto-approve
+        run: terraform apply -var="deploy_lambda=true" -var="image_tag=${{ github.run_number }}" -input=false --auto-approve
+
+      - name: Show Deployment URL
+        working-directory: terraform-infra
+        run: |
+          echo "API URL: $(terraform output -raw api_gateway_url)"
