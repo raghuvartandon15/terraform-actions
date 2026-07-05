@@ -53,7 +53,7 @@ jobs:
 
       - name: deploy lambda 
         working-directory: terraform-infra
-        run: terraform apply -var="deploy_lambda=true" -var="image_tag=${{ github.run_number }}" -input=false --auto-approve
+        run: terraform apply -var="deploy_lambda=true" -var="image_tag=${{ github.sha }}" -input=false --auto-approve
 
       - name: Show Deployment URL
         working-directory: terraform-infra
