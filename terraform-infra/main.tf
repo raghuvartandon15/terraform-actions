@@ -29,13 +29,13 @@ resource "aws_iam_role" "lambda_role" {
   })
 }
 
-resource "aws_iam_policy_attachment" "lambda_write_logs_policy_attachment" {
+resource "aws_iam_role_policy_attachment" "lambda_write_logs_policy_attachment" {
   role       = aws_iam_role.lambda_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
 
-resource "aws_iam_policy_attachment" "lambda_s3_policy_attachment" {
+resource "aws_iam_role_policy_attachment" "lambda_s3_policy_attachment" {
   role       = aws_iam_role.lambda_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
 }
