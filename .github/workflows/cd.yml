@@ -51,6 +51,11 @@ jobs:
       - name: push model to s3
         run: aws s3 cp ml_pipiline.pkl s3://${{ steps.tf_outputs.outputs.bucket_name }}
 
+      - name: Verify image tag
+        run: |
+          aws ecr describe-images \
+            --repository-name gh_actions_image_repo
+            
       - name: deploy lambda 
         working-directory: terraform-infra
         run: terraform apply -var="deploy_lambda=true" -var="image_tag=${{ github.sha }}" -input=false --auto-approve
